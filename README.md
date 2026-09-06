@@ -26,23 +26,23 @@ The Streamlit interface displays the pipeline progress, raw intermediate results
 
 ## Architecture
 
-```text
-Research topic
-	|
-	v
-Search agent (Tavily web search)
-	|
-	v
-Reader agent (URL selection and page extraction)
-	|
-	v
-Writer chain (structured report)
-	|
-	v
-Critic chain (score and recommendations)
-	|
-	v
-Report + review feedback
+```mermaid
+graph LR
+    Topic[👤 Research Topic] --> Orchestrator{Pipeline Orchestrator}
+
+    Orchestrator -->|Step 1| Search[🔍 Search Agent]
+    Search -->|Step 2| Reader[📄 Reader Agent]
+    Reader -->|Step 3| Writer[✍️ Writer Chain]
+    Writer -->|Step 4| Critic[🧐 Critic Chain]
+    Critic --> Output[🖥️ Streamlit UI<br/>Report + Score]
+
+    Tavily[(Tavily API<br/>web_search)] --> Search
+    Scraper[(scrape_url<br/>BS4 · Trafilatura · Readability)] --> Reader
+    LLM[(Gemini<br/>gemini-2.5-flash)] --> Writer
+    LLM --> Critic
+
+    style Output fill:#0f2818,stroke:#3fb950,color:#e6f5ea
+    style Orchestrator fill:#161b22,stroke:#58a6ff,color:#c9d1d9
 ```
 
 The core orchestration is implemented in `src/pipelines/pipeline.py`. Model and agent definitions live in `src/agents/agents.py`, and the search/scraping tools live in `src/tools/tools.py`.
