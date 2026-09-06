@@ -13,6 +13,12 @@ The application combines web retrieval and language-model reasoning into a four-
 
 The Streamlit interface displays the pipeline progress, raw intermediate results, final report, and critic feedback. Reports can be downloaded as Markdown files.
 
+## Live Demo
+
+Try the app here: **[Multi-Agent Research Assistant](https://multi-agent-research-system-moaj.onrender.com)**
+
+> Note: Hosted on Render's free tier — the app may take up to ~30 seconds to wake up if it's been idle.
+
 ## Features
 
 - Multi-agent research workflow with clearly separated responsibilities
